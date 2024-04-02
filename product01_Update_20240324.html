@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>product01_Update_20240324</title>
+    <link rel="stylesheet" href="serenty_css/all.min.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "標楷體", Arial, Helvetica, sans-serif;
+      }
+
+      .member_title {
+        background-color: #000000;
+        display: flex;
+        align-items: center;
+      }
+
+      .title_text {
+        color: #ffffff;
+        font-size: 28px;
+        margin-left: 10vw;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .btn_product01{
+        border: none;
+        border-radius: 5px;
+        width: 60px;
+        height: 50px;
+        color: #ffffff;
+        background-color: #370e83;
+        font-size: 18px;
+        margin-left: 30px;
+      }
+      .btn_product02{
+        border: none;
+        border-radius: 5px;
+        width: 60px;
+        height: 50px;
+        color: #ffffff;
+        background-color: #370e83;
+        font-size: 18px;
+        margin-right: auto;
+      }
+      .btn_member_logout {
+        /* display: none; */
+        border: none;
+        border-radius: 5px;
+        width: 60px;
+        height: 50px;
+        color: #ffffff;
+        background-color: #1f3108;
+        font-size: 18px;
+        margin-right: 10vw;
+      }
+      .member_main {
+        width: 80%;
+        margin: 30px auto auto auto;
+      }
+      .member_main table {
+        width: 100%;
+      }
+      .member_main caption {
+        caption-side: bottom;
+        text-align: right;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      .member_main th {
+        text-align: left;
+      }
+      .member_main table,
+      th,
+      td {
+        font-size: 22px;
+        border: 1px solid green;
+        border-collapse: collapse;
+      }
+      .member_main tr {
+        height: 55px;
+      }
+      .td_btn {
+        /* display: flex; */
+        border: 1px solid green;
+        /* align-items: flex-end;
+            justify-content: center; */
+        /* font-size: 0; */
+        text-align: center;
+      }
+      .btn_member_update,
+      .btn_member_delete {
+        border: none;
+        border-radius: 5px;
+        width: 60px;
+        height: 50px;
+        color: #ffffff;
+        font-size: 22px;
+      }
+      .btn_member_update {
+        background-color: #198754;
+        /* margin-left: 10px; */
+      }
+      .btn_member_delete {
+        background-color: #dc3545;
+      }
+      .p_img {
+        width: 100px;
+        height: 100px;
+      }
+
+      /*update modal*/
+      .update_modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 20px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .update_modal_content {
+        background-color: #fefefe;
+        margin: auto;
+        border: 1px solid #888;
+        width: 900px;
+        border-radius: 10px;
+      }
+
+     
+    .section_menu {
+      display: flex;
+      justify-content: center;
+    }
+    .create_menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 900px;
+    }
+    .pro_id{
+      display: none;
+      justify-content: start;
+      width: 600px;
+      height: 30px;
+      font-size: 20px;
+      margin: 10px 0 10px 0;
+    }
+    .pro_id input{
+      display: none;
+      width: 550px;
+      margin-left: 30px;
+      font-size: 20px;
+    }
+    /* .pro_category{
+      display: none;
+      justify-content: start;
+      width: 600px;
+      height: 30px;
+      font-size: 20px;
+      margin: 10px 0 10px 0;
+    }
+    .pro_category input{
+      width: 550px;
+      margin-left: 10px;
+      font-size: 20px;
+    } */
+    .pro_name {
+      display: flex;
+      justify-content: start;
+      width: 600px;
+      height: 30px;
+      font-size: 20px;
+      margin: 10px 0 10px 0;
+    }
+    .pro_name input {
+      width: 550px;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+    .pro_pic{
+      margin-top: 20px;
+    }
+    .pro_pic img {
+      width: 600px;
+      height: 300px;
+    }
+    .pro_pic label {
+      display: block;
+      width: 600px;
+      font-size: 20px;
+      background-color: rgb(19, 31, 134);
+      color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .pro_pic input {
+      display: none;
+      width: 600px;
+      font-size: 20px;
+      background-color: rgb(19, 31, 134);
+      color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .pro_clear{
+      border: none;
+      border-radius: 5px;
+      width: 60px;
+      height: 50px;
+      color: #ffffff;
+      background-color: #0f514e;
+      margin-left: auto;
+      margin-right: 10px;
+      margin-top: 10px;
+      font-size: large;
+    }
+    .pro_button {
+      border: none;
+      border-radius: 5px;
+      width: 60px;
+      height: 50px;
+      color: #ffffff;
+      background-color: #4f48a8;
+      /* margin-left: auto; */
+      margin-top: 10px;
+      font-size: large;
+    }
+    .close{
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="member_title">
+      <div class="title_text">產品管理</div>
+      <button class="btn_product01" id="type_product01" type="button">模型</button>
+      <button class="btn_product02" id="type_product02" type="button">工具</button>
+      <span
+        id="user_message"
+        style="
+          align-self: center;
+          margin-right: 20px;
+          color: #5599ff;
+          font-size: 28px;
+        "
+        >test</span
+      >
+      <button class="btn_member_logout" id="s02_logout_btn" type="button">
+        登出
+      </button>
+    </div>
+
+    <div class="member_main">
+      <table>
+        <caption>
+          產品列表
+        </caption>
+        <thead class="">
+          <tr>
+            <th style="width: 50px">產品編號</th>
+            <th style="width: 120px">產品名稱</th>
+            <th style="width: 400px">檔案位置</th>
+            <th>產品圖片</th>
+            <th
+              style="
+                width: 50px;
+                word-wrap: break-word;
+                word-break: break-all;
+                line-break: anywhere;
+                overflow: hidden;
+              "
+            >
+              產品描述
+            </th>
+            <th style="width: 50px">產品數量</th>
+            <th style="width: 60px">產品價錢</th>
+            <th style="width: 50px">排列順序</th>
+            <th>上傳時間</th>
+          </tr>
+        </thead>
+        <tbody id="mydata">
+          <tr>
+            <th>產品編號</th>
+            <th>產品名稱</th>
+            <th>檔案位置</th>
+            <th>
+              <img
+                class="p_img"
+                src="img_product01/002_bruce-tang-nKO_1QyFh9o-unsplash.jpg"
+                alt=""
+              />
+            </th>
+            <th>產品描述</th>
+            <th>產品數量</th>
+            <th>產品價錢</th>
+            <th>排列順序</th>
+            <th>上傳時間</th>
+            <td class="td_btn"> <!--data- 後方不可有大寫英文字-->
+              <button class="btn_member_update" data-bs-toggle="modal" data-id="產品編號" data-pname="產品名稱" data-src="檔案位置" data-describe="產品描述" data-count="產品數量" data-price="產品價錢" data-order="排列順序" id="update_btn" data-bs-target="#updateModal">
+                更新
+              </button>
+              <button
+                class="btn_member_delete"
+                data-id="產品編號"
+                id="delete_btn"
+              >
+                刪除
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- update modal-->
+    <div id="updateModal" class="update_modal">
+      <div class="update_modal_content">
+        <div style="display:flex ;justify-content: center;">
+      <div style="display: flex; width:600px">
+        <h1 style="font-size: 1.6rem;margin-top: 10px;flex: 1;">產品更新</h1>
+        <span class="close">&times;</span>
+      </div>
+    </div>
+        
+    
+      <section class="section_menu">
+        <form id="create_form" class="create_menu" enctype="multipart/form-data" action="">
+          <div class="pro_pic">
+            <img
+              id="imgPreview"
+              src="img_product01/simple_color.jpg"
+              alt="Preview"
+            />
+            <label for="myFileInput">選擇圖檔</label>
+            <input type="file" accept="image/jpeg, image/jpg, image/png, img/gif" id="myFileInput" name="myFileInput"/>
+          </div>
+          <div class="pro_id">  <!-- 此項隱藏 -->
+            <label for="pid">ID</label>
+            <input type="number" name="pid" id="pid"/>
+          </div>
+          <!-- <div class="pro_category"> 
+            <label for="pcategory">種類</label>
+            <input type="text" name="pcategory" id="pcategory" />
+          </div> -->
+          <div class="pro_name">
+            <label for="pname">品名</label>
+            <input type="text" name="pname" id="pname" />
+          </div>
+          <div class="pro_name">
+            <label for="p_describe">描述</label>
+            <textarea
+              style="margin-left: 10px; font-size: 20px"
+              name="p_describe"
+              id="p_describe"
+              cols="51"
+              rows="10"
+            ></textarea>
+          </div>
+          <div class="pro_name">
+            <label for="p_number">數量</label>
+            <input type="number" name="p_number" id="p_number" />
+          </div>
+          <div class="pro_name">
+            <label for="p_price">價錢</label>
+            <input type="number" name="p_price" id="p_price" />
+          </div>
+          <div class="pro_name">
+            <label for="p_order">順序</label>
+            <input type="number" name="p_order" id="p_order" />
+          </div>
+          <div style="display: flex; width: 600px">
+            <input type="button" name="" id="clear_btn" class="pro_clear" value="清空">
+            <button id="ok_btn" type="button" class="pro_button">確認</button>
+          </div>
+        </form>
+      </section>        
+
+
+
+      </div>
+    </div>
+
+    <script src="serenty_js/jquery-3.7.1.min.js"></script>
+    <!-- <script src="serenty_js/bootstrap.bundle.min.js"></script> -->
+    <script>
+      var u_id="";//for update id
+      let oringin_imgSrc = "";//需先存放原圖位址
+      let check_img_update=3;//標記是否有新選圖或按清空鑑=> 1:有選新圖. 2:有按清空鍵.3: 沒選新圖, 也沒按清空鍵.  
+      let api_url="product01_Read_api_serenty_20240323.php?datasheet=product01";
+      let product_type="product01";//給 api 選擇操作哪個資料表用
+      $(function () {
+        //讀取產品資料
+        $.ajax({
+          type: "GET",
+          url: api_url,
+          async: false,
+          dataType: "json",
+          success: showdata,
+          error: function () {
+            alert("error_product01_Read_api_serenty_20240323.php");
+          },
+        });
+        // update modal
+        // 宣告開啟和關閉 modal 用的變數
+        var update_modal=document.getElementById("updateModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        //監聽關閉 modal 的按鈕
+        span.onclick = function () {
+        update_modal.style.display = "none";
+    // $("#login_username").val(""); //清空 input 內的值
+    // $("#login_password").val("");
+  };
+
+  //監聽選擇產品類型按鈕  id="type_product01"
+  document.getElementById('type_product01').addEventListener('click', function() {
+             api_url="product01_Read_api_serenty_20240323.php?datasheet=product01";
+             product_type="product01";
+             $.ajax({
+                     type: "GET",
+                     url: api_url,
+                     async: false,
+                    dataType: "json",
+                    success: showdata,
+                    error: function () {
+                    alert("error_product01_Read_api_serenty_20240323.php?datasheet=product01");
+          },
+        });
+             });
+  //監聽選擇產品類型按鈕  id="type_product02"
+  document.getElementById('type_product02').addEventListener('click', function() {
+             api_url="product01_Read_api_serenty_20240323.php?datasheet=product02";
+             product_type="product02";
+             $.ajax({
+                    type: "GET",
+                    url: api_url,
+                    async: false,
+                    dataType: "json",
+                    success: showdata,
+                    error: function () {
+                    alert("error_product01_Read_api_serenty_20240323.php?datasheet=product02");
+          },
+        });
+             });
+
+
+   //更新按鈕監聽 id:update_btn, 因此按鈕是渲染出來, 所以在監聽時前方要加上上一層的 id.
+   $("body").on("click", "#mydata #update_btn" ,function(){
+          
+          u_id=$(this).data("id");
+          oringin_imgSrc=$(this).data("src");//要是沒重選圖片, 只更新其他部分, 那就要用這原來的位址.
+          update_modal.style.display = "block"; // 在 update modal 一開始就設了 update_modal 這個全域變數
+
+          document.getElementById("imgPreview").src=$(this).data("src");
+          $("#pid").val(parseInt($(this).data("id")));
+          $("#pname").val($(this).data("pname"));
+          $("#p_describe").val($(this).data("describe"));
+          $("#p_number").val(parseInt($(this).data("count")));// p_number 是 int 要加上 parseInt()
+          $("#p_price").val(parseInt($(this).data("price")));// p_price 是 int 要加上 parseInt()
+          $("#p_order").val(parseInt($(this).data("order")));// p_order 是 int 要加上 parseInt()
+        });
+        //更新時選取檔案的圖片顯示時用
+        let profilePic = document.getElementById("imgPreview");
+        let inputFile = document.getElementById("myFileInput");
+        
+        inputFile.onchange = function () {
+          profilePic.src = URL.createObjectURL(inputFile.files[0]);
+          check_img_update=1; //標記有選圖
+        };
+
+        //以上為更新時選取檔案的圖片顯示時用
+        
+        //監聽清空按鈕 id=clear_btn
+        document.getElementById('clear_btn').addEventListener('click', function() {
+        // 清空表單
+        document.getElementById('create_form').reset();
+        document.getElementById("imgPreview").src="img_product01/simple_color.jpg";
+        // 設定各個輸入欄位的預設值
+        document.getElementById('pname').value ="";
+        document.getElementById('p_describe').value ="";
+        document.getElementById('p_number').value =0;
+        document.getElementById('p_price').value =0;
+        document.getElementById('p_order').value =0;
+        document.getElementById('pid').value =u_id;
+
+        check_img_update=2;//標記有按清空鍵
+    });
+    
+        //監聽確認更改的按鈕 id="ok_btn"
+        $("#ok_btn").click(function(){
+          var form =$("#create_form")[0];
+          //var form = document.getElementById('create_form');
+          var formdata=new FormData(form);
+          formdata.set("P_src_clear", "img_product01/simple_color.jpg");
+          formdata.set("P_src_oringin", oringin_imgSrc);
+          formdata.set("P_src_check", check_img_update);
+          formdata.set("product_type", product_type);
+
+          //查看 formdata 中的資料
+          const object = {};
+          formdata.forEach((value, key) => {
+          object[key] = value;
+          });
+          //以上為查看 formdata 中的資料
+
+          $.ajax({
+                type:'POST',
+                url:'product01_Update_api_serenty_20240329.php',
+                data:formdata,
+                contentType:false,
+                processData:false,
+
+                success: function (data){
+                    alert("sucess");
+                    $('#create_form')[0].reset();
+                    document.getElementById("imgPreview").src="img_product01/simple_color.jpg";
+                    check_img_update=3;//3: 代表沒選新圖, 也沒按清空鍵.  
+                },
+                error:function(){
+                  alert("error_product01_Update_api_serenty_20240329.php");
+                }
+               });
+        });
+
+        //監聽刪除按鈕 id = delete_btn, 因此按鈕是渲染出來, 所以在監聽時前方要加上上一層的 id.
+        $("body").on("click", "#mydata #delete_btn", function(){
+         
+          if(confirm("確認刪除此筆資料嗎?")){
+            //傳遞刪除資料至後端api {"ID":"XX","product_type":"product01"}
+            var dataJSON={};
+            dataJSON["ID"]=$(this).data("id");
+            dataJSON["product_type"]=product_type;
+            $.ajax({
+              type:"POST",
+              url:"product01_Delete_api_serenty_20240325.php",
+              data:JSON.stringify(dataJSON),
+              dataType:"json",
+              success:showdata_delete,
+              error:function(){
+                alert("error_product01_Delete_api_serenty_20240325.php");
+              }
+            });
+          }
+        });
+        
+        //判斷是否登入
+        if (getCookie("UID01") != "") {
+          //UID01存在, 傳遞到後端 api 判斷是否合法
+          var dataJSON = {};
+          dataJSON["UID01"] = getCookie("UID01");
+          $.ajax({
+            type: "POST",
+            url: "serenty_member_Check_UID_api_20240318.php",
+            data: JSON.stringify(dataJSON),
+            dataType: "json",
+            success: showdata_Check_UID,
+            error: function () {
+              alert(error_serenty_member_Check_UID_api_20240318.php);
+            }
+          });      
+        }else{
+          location.href = "serenty_20240323.html";
+        }
+
+        //w3school
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+      //w3school
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+        //登出按鈕監聽 id = s02_logout_btn
+        $("#s02_logout_btn").click(function(){
+          setCookie("UID01","",7);
+          location.href="serenty_20240323.html";
+        });
+
+      });
+      //此為 $(function () {}); 底部
+
+      //渲染出產品01頁面資料
+      function showdata(data) {
+        $("#mydata").empty();
+        data.data.forEach(function (item) {
+          var strHTML ='"<tr><th>"'+item.ID+'"</th><th>"'+item.Name +'"</th><th>"'+item.P_src +'"</th><th><img class="p_img" src="'+item.P_src+'"alt=""/></th><th>"'+item.P_describe+'"</th><th>"'+item.P_count+'"</th><th>"'+item.Price+'"</th><th>"'+item.P_order+'"</th><th>"'+item.Created_at+'"</th><td class="td_btn"><button class="btn_member_update" data-bs-toggle="modal" data-id="'+item.ID+'" data-pname="'+item.Name+'" data-src="'+item.P_src+'" data-describe="'+item.P_describe+'" data-count="'+item.P_count+'" data-price="'+item.Price+'" data-order="'+item.P_order+'" id="update_btn" data-bs-target="#updateModal">更新</button><button class="btn_member_delete" data-id="'+item.ID+'" id="delete_btn">刪除</button></td></tr>';
+
+          $("#mydata").append(strHTML);
+        });
+      }
+
+      //確認刪除後執行 showdata_delete 函數
+      function showdata_delete(data){
+        if(data.state){
+          alert(data.message);
+          location.href="product01_Update_20240324.html";
+        }else{
+          alert(data.message);
+        }
+      }
+      //當UID01存在, 傳遞到後端 api 判斷為與資料庫數據一致時執行   showdata_Check_UID()
+      function showdata_Check_UID(data) {
+        if (data.state) {
+          //增加登錄者資訊
+          $("#user_message").text(data.data[0].Username + "登入中");
+        } else {
+          location.href = "serenty_20240323.html";
+        }
+      }
+    </script>
+  </body>
+</html>

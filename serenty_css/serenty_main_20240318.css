@@ -1,0 +1,76 @@
+.product_1st {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: lightgreen; */
+    height: 50px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+  }
+  .product_title_01 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(124, 139, 224);
+    margin-left: 8.2vw;
+    height: 100%;
+    width: 150px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .product_01_item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-right: 7vw;
+    margin-left: 7vw;
+  }
+  .card_item {
+    width: 390px;
+    height: 500px;
+    margin: 20px;
+    box-shadow: 0 0 2px 2px gray;
+  }
+  img {
+    width: 100%;
+    height: 60%;
+  }
+  .item_name {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 10px 10px 20px;
+    /* flex: 1; */
+  }
+  .item_price_title{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 10px 5px 20px;
+    /* flex: 1; */
+  }
+  .item_price{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 10px 5px 0px;
+    margin-right: auto;;
+  }
+  .item_describe {
+    width: 80%;
+    height: 60px;
+    box-shadow: 0 0 2px 2px gray;
+    margin: 10px 10px 15px 20px;
+  }
+  .buy_row {
+    display: flex;
+  }
+  .buy_btn_class {
+    border: none;
+    border-radius: 5px;
+    width: 60px;
+    height: 35px;
+    color: #ffffff;
+    background-color: #337a77;
+    transition: 0.5s;
+    margin-right: 50px;
+    font-size: 20px;
+  }

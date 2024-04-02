@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serenty_product01_Create_20240324</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "標楷體", Arial, Helvetica, sans-serif;
+    }
+
+    .member_title {
+      background-color: #000000;
+      display: flex;
+      align-items: center;
+    }
+
+    .title_text {
+      color: #ffffff;
+      flex: 1;
+      font-size: 28px;
+      margin-left: 10vw;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .btn_member_logout {
+      /* display: none; */
+      border: none;
+      border-radius: 5px;
+      width: 60px;
+      height: 50px;
+      color: #ffffff;
+      background-color: #1f3108;
+      font-size: 18px;
+      margin-right: 10vw;
+    }
+    .section_menu {
+      display: flex;
+      justify-content: center;
+    }
+    .create_menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 900px;
+    }
+    .pro_category{
+      display: flex;
+      justify-content: start;
+      width: 600px;
+      height: 30px;
+      font-size: 20px;
+      margin: 10px 0 10px 0;
+    }
+    .pro_category input{
+      width: 550px;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+    .pro_name {
+      display: flex;
+      justify-content: start;
+      width: 600px;
+      height: 30px;
+      font-size: 20px;
+      margin: 10px 0 10px 0;
+    }
+    .pro_name input {
+      width: 550px;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+    .pro_pic{
+      margin-top: 20px;
+    }
+    .pro_pic img {
+      width: 600px;
+      height: 300px;
+    }
+    .pro_pic label {
+      display: block;
+      width: 600px;
+      font-size: 20px;
+      background-color: rgb(19, 31, 134);
+      color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .pro_pic input {
+      display: none;
+      width: 600px;
+      font-size: 20px;
+      background-color: rgb(19, 31, 134);
+      color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .pro_clear{
+      border: none;
+      border-radius: 5px;
+      width: 60px;
+      height: 50px;
+      color: #ffffff;
+      background-color: #0f514e;
+      margin-left: auto;
+      margin-right: 10px;
+      margin-top: 10px;
+      font-size: large;
+    }
+    .pro_button {
+      border: none;
+      border-radius: 5px;
+      width: 60px;
+      height: 50px;
+      color: #ffffff;
+      background-color: #4f48a8;
+      /* margin-left: auto; */
+      margin-top: 10px;
+      font-size: large;
+    }
+  </style>
+  <body>
+    <div class="member_title">
+      <div class="title_text">新建產品</div>
+      <span
+        id="user_message"
+        style="
+          align-self: center;
+          margin-right: 20px;
+          color: #5599ff;
+          font-size: 28px;
+        "
+        >test</span
+      >
+      <button class="btn_member_logout" id="s02_logout_btn" type="button">
+        登出
+      </button>
+    </div>
+    <section class="section_menu">
+      <form id="create_form" class="create_menu" enctype="multipart/form-data" action="">
+        <div class="pro_pic">
+          <img
+            id="imgPreview"
+            src="img_product01/simple_color.jpg"
+            alt="Preview"
+          />
+          <label for="myFileInput">選擇圖檔</label>
+          <input type="file" accept="image/jpeg, image/jpg, image/png, img/gif" id="myFileInput" name="myFileInput"/>
+        </div>
+        <!-- <div class="pro_category">
+          <label for="pcategory">種類</label>
+          <input type="text" name="pcategory" id="pcategory" />
+        </div> -->
+
+        <div class="pro_category">
+          <select style="font-size: 20px;" name="pcategory" id="pcategory">
+              <!-- <option value="" selected disabled>---選擇類別---</option> -->
+              <option value="product01" selected>product01</option>
+              <option value="product02">product02</option>
+          </select>
+        </div>
+
+        <div class="pro_name">
+          <label for="pname">品名</label>
+          <input type="text" name="pname" id="pname" />
+        </div>
+        <div class="pro_name">
+          <label for="p_describe">描述</label>
+          <textarea
+            style="margin-left: 10px; font-size: 20px"
+            name="p_describe"
+            id="p_describe"
+            cols="51"
+            rows="10"
+          ></textarea>
+        </div>
+        <div class="pro_name">
+          <label for="p_number">數量</label>
+          <input type="number" name="p_number" id="p_number" />
+        </div>
+        <div class="pro_name">
+          <label for="p_price">價錢</label>
+          <input type="number" name="p_price" id="p_price" />
+        </div>
+        <div class="pro_name">
+          <label for="p_order">順序</label>
+          <input type="number" name="p_order" id="p_order" />
+        </div>
+        <div style="display: flex; width: 600px">
+          <input type="reset" name="" id="clear_btn" class="pro_clear" value="清空">
+          <button id="ok_btn" type="button" class="pro_button">確認</button>
+        </div>
+      </form>
+    </section>
+
+    <script src="serenty_js/jquery-3.7.1.min.js"></script>
+    <script>
+      $(function () {
+        //圖片顯示
+        let profilePic = document.getElementById("imgPreview");
+        let inputFile = document.getElementById("myFileInput");
+           
+        inputFile.onchange = function () {
+          profilePic.src = URL.createObjectURL(inputFile.files[0]);
+        };
+        //以上為圖片顯示
+        //監聽清空按鈕 id=clear_btn
+        $("#clear_btn").click(function(){
+          document.getElementById("imgPreview").src="img_product01/simple_color.jpg";
+        });
+
+        //監聽確認按鈕 id=ok_btn
+        $("#ok_btn").click(function () {
+          var form =$("#create_form")[0];
+          var formdata=new FormData(form);
+           
+          $.ajax({
+                type:'POST',
+                url:'product01_Create_api_serenty_20240329.php',
+                data:formdata,
+                contentType:false,
+                processData:false,
+
+                success: function (data){
+                    alert("sucess");
+                    $('#create_form')[0].reset();
+                    document.getElementById("imgPreview").src="img_product01/simple_color.jpg";
+                },
+                error:function(){
+                  alert("error_product01_Create_api_serenty_20240329.php");
+                }
+               });
+           });
+
+        //判斷是否登入
+        if (getCookie("UID01") != "") {
+          //UID01存在, 傳遞到後端 api 判斷是否合法
+          var dataJSON = {};
+          dataJSON["UID01"] = getCookie("UID01");
+          $.ajax({
+            type: "POST",
+            url: "serenty_member_Check_UID_api_20240318.php",
+            data: JSON.stringify(dataJSON),
+            dataType: "json",
+            success: showdata_Check_UID,
+            error: function () {
+              alert(error_serenty_member_Check_UID_api_20240318.php);
+            }
+          });      
+        }else{
+          location.href = "serenty_20240323.html";
+        }
+
+        //w3school
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+      //w3school
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+        //登出按鈕監聽 id:s02_logout_btn
+        $("#s02_logout_btn").click(function () {
+          setCookie("UID01", "", 7);
+          location.href = "serenty_20240323.html";
+        });
+      });
+
+      //此為 $(function () {}); 底部
+
+      function showdata_Check_UID(data) {
+        if (data.state) {
+          //增加登錄者資訊
+          $("#user_message").text(data.data[0].Username + "登入中");
+        } else {
+          location.href = "serenty_20240323.html";
+        }
+      }
+
+
+    </script>
+  </body>
+</html>

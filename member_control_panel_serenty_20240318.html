@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Member</title>
+    <link rel="stylesheet" href="serenty_css/all.min.css" />
+    <link rel="stylesheet" href="serenty_css/bootstrap.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "標楷體", Arial, Helvetica, sans-serif;
+      }
+
+      .member_title {
+        background-color: #000000;
+        display: flex;
+        align-items: center;
+      }
+
+      .title_text {
+        color: #ffffff;
+        flex: 1;
+        font-size: 28px;
+        margin-left: 10vw;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .btn_member_logout {
+        /* display: none; */
+        border: none;
+        border-radius: 5px;
+        width: 60px;
+        height: 50px;
+        color: #ffffff;
+        background-color: #1f3108;
+        font-size: 22px;
+        margin-right: 10vw;
+      }
+
+      /* .menu_toggle {
+        display: flex;
+        align-items: center;
+        height: 50px;
+        color: #ffffff;
+        margin-right: 10vw;
+      } */
+      .member_main {
+        width: 80%;
+        margin: 30px auto auto auto;
+      }
+      .member_main table {
+        width: 100%;
+      }
+      .member_main caption {
+        caption-side: bottom;
+        text-align: right;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+      .member_main th {
+        text-align: left;
+      }
+      .member_main table,
+      th,
+      td {
+        font-size: 22px;
+        border: 1px solid green;
+        border-collapse: collapse;
+      }
+      .member_main tr {
+        height: 55px;
+      }
+      .td_btn {
+        /* display: flex; */
+        border: 1px solid green;
+        /* align-items: flex-end;
+            justify-content: center; */
+        /* font-size: 0; */
+        text-align: center;
+      }
+      .btn_member_update,
+      .btn_member_delete {
+        border: none;
+        border-radius: 5px;
+        width: 60px;
+        height: 50px;
+        color: #ffffff;
+        font-size: 22px;
+      }
+      .btn_member_update {
+        background-color: #198754;
+        /* margin-left: 10px; */
+      }
+      .btn_member_delete {
+        background-color: #dc3545;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="member_title">
+      <div class="title_text">會員管理</div>
+      <span
+        id="user_message"
+        style="
+          align-self: center;
+          margin-right: 20px;
+          color: #5599ff;
+          font-size: 28px;
+        "
+        >test</span
+      >
+      <button class="btn_member_logout" id="s02_logout_btn" type="button">
+        登出
+      </button>
+    </div>
+    <div class="member_main">
+      <table>
+        <caption>
+          會員列表
+        </caption>
+        <thead class="">
+          <tr>
+            <th>會員編號</th>
+            <th>會員名稱</th>
+            <th>會員信箱</th>
+            <th>註冊時間</th>
+            <th>等級</th>
+            <th>功能</th>
+          </tr>
+        </thead>
+        <tbody id="mydata">
+          <tr>
+            <td>會員編號</td>
+            <td>會員名稱</td>
+            <td>會員信箱</td>
+            <td>註冊時間</td>
+            <th>等級</th>
+            <td class="td_btn">
+              <button
+                class="btn_member_update" data-bs-toggle="modal" data-id="會員編號" data-username="會員名稱" data-email="會員信箱" data-grade="會員等級" id="update_btn" data-bs-target="#updateModal">更新
+              </button>
+              <button class="btn_member_delete" data-id="會員編號" id="delete_btn">刪除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- updateModal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header text-bg-success">
+                  <h1 class="modal-title fs-3 fw-900" id="exampleModalLabel">會員更新</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="mb-3">
+                      <label for="updateModal_username" class="form-label">帳號</label>
+                      <input type="text" class="form-control" disabled id="updateModal_username"
+                          name="updateModal_username">
+                  </div>
+                  <div class="mb-3">
+                      <label for="updateModal_email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="updateModal_email" name="updateModal_email">
+                  </div>
+                  <div class="mb-3">
+                    <label for="updateModal_grade" class="form-label">等級</label>
+                    <input type="number" class="form-control" id="updateModal_grade" name="updateModal_grade">
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary" id="updateModal_updata_btn">確認</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+    <script src="serenty_js/jquery-3.7.1.min.js"></script>
+    <script src="serenty_js/bootstrap.bundle.min.js"></script>
+    <script>
+
+      var u_id;//for update id
+
+      $(function () {
+        //判斷是否登入
+        if (getCookie("UID01") != "") {
+          //UID01存在, 傳遞到後端 api 判斷是否合法
+          var dataJSON = {};
+          dataJSON["UID01"] = getCookie("UID01");
+          $.ajax({
+            type: "POST",
+            url: "serenty_member_Check_UID_api_20240318.php",
+            data: JSON.stringify(dataJSON),
+            dataType: "json",
+            success: showdata_Check_UID,
+            error: function () {
+              alert(error_serenty_member_Check_UID_api_20240318.php);
+            }
+          });      
+        }else{
+          location.href = "serenty_20240323.html";
+        }
+
+        //更新按鈕監聽 id:update_btn, 因此按鈕是渲染出來, 所以在監聽時前方要加上上一層的 id.
+        $("body").on("click", "#mydata #update_btn" ,function(){
+          u_id=$(this).data("id");
+          $("#updateModal_username").val($(this).data("username"));
+          $("#updateModal_email").val($(this).data("email"));
+          $("#updateModal_grade").val(parseInt($(this).data("grade")));// grade 是 int 要加上 parseInt()
+        });
+
+        //監聽刪除按鈕 id: delete_button , 因此按鈕是渲染出來, 所以在監聽時前方要加上上一層的 id.
+        $("body").on("click", "#mydata #delete_btn", function(){
+          if(confirm("確認刪除此筆資料嗎?")){
+            //傳遞刪除資料至後端api {"ID":"XX"}
+            var dataJSON={};
+            dataJSON["ID"]=$(this).data("id");
+           
+            $.ajax({
+              type:"POST",
+              url:"member_Delete_api_serenty_20240318.php",
+              data:JSON.stringify(dataJSON),
+              dataType:"json",
+              success:showdata_delete,
+              error:function(){
+                alert("error_member_Delete_api_serenty_20240318.php");
+              }
+
+            });
+          }
+        });
+
+
+        //登出按鈕監聽 id:s02_logout_btn
+        $("#s02_logout_btn").click(function () {
+          setCookie("UID01", "", 7);
+          location.href = "serenty_20240323.html";
+        });
+
+        //讀取會員資料
+        $.ajax({
+          type:"GET",
+          url:"member_Read_api_serenty_20240318.php",
+          async:false,
+          dataType:"json",
+          success:showdata,
+          error:function(){
+            alert("error_member_Read_api_serenty_20240318.php");
+          }
+        });
+
+        //監聽 #updateModal_updata_btn
+        $("#updateModal_updata_btn").click(function(){
+          //傳遞更新資料至後端api {"ID":"XX", "Email":"XXXXX", "Grade":XXX}
+          var dataJSON={};
+          dataJSON["ID"]=u_id;
+          dataJSON["Email"]=$("#updateModal_email").val();
+          //dataJSON["Grade"]=parseInt($("updateModal_grade").val());
+          dataJSON["Grade"]=$("#updateModal_grade").val();
+
+          $.ajax({
+              type:"POST",
+              url:"member_Update_api_serenty_20240318.php",
+              data:JSON.stringify(dataJSON),
+              dataType:"json",
+              success:showdata_update,
+              error:function(){
+                alert("error_member_Update_api_serenty_20240318.php");
+              }
+          });
+        });
+
+
+      });
+      //此為 $(function () {}); 底部
+
+      function showdata_Check_UID(data) {
+        if (data.state) {
+          //增加登錄者資訊
+          $("#user_message").text(data.data[0].Username + "登入中");
+        } else {
+          location.href = "serenty_20240323.html";
+        }
+      }
+      //w3school
+      function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+      //w3school
+      function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(";");
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == " ") {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+      //showdata 來自 20240125_老師範例中的 20240123-product01-Read.html
+      function showdata(data){
+          $("#mydata").empty();
+          data.data.forEach(function(item){
+            var strHTML='<tr><td>'+item.ID+'</td><td>'+item.Username+'</td><td>'+item.Email+'</td><td>'+item.Created_at+'</td><th>'+item.Grade+'</th><td class="td_btn"><button class="btn_member_update" data-bs-toggle="modal" data-id="'+item.ID+'" data-username="'+item.Username+'" data-email="'+item.Email+'" data-grade="'+item.Grade+'<" id="update_btn" data-bs-target="#updateModal">更新</button><button class="btn_member_delete" data-id="'+item.ID+'" id="delete_btn">刪除</button></td></tr>';
+            $("#mydata").append(strHTML);
+          });
+      }
+      function showdata_delete(data){
+        if(data.state){
+          alert(data.message);
+          location.href="member_control_panel_serenty_20240318.html";
+        }else{
+          alert(data.message);
+        }
+      }
+      function showdata_update(data){
+        if(data.state){
+          alert(data.message);
+          location.href="member_control_panel_serenty_20240318.html";
+        }else{
+          alert(data.message);
+        }
+      }
+
+    </script>
+  </body>
+</html>
